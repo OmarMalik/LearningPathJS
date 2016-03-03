@@ -15,6 +15,14 @@ config(function ($routeProvider, $locationProvider) {
     templateUrl: 'templates/new-topic.html',
     controller: 'NewTopicController'
   })
+  .when('/topics/:title', {
+    templateUrl: 'templates/topic.html',
+    controller: 'TopicController'
+  })
+  .when('/topics/:title/new-path', {
+    templateUrl: 'templates/new-path.html',
+    controller: 'NewPathController'
+  })
   .otherwise({
     redirectTo: '/'
   });

@@ -1,0 +1,19 @@
+{
+  "name": "learningpath",
+  "version": "0.0.1",
+  "author": {
+    "name": "Omar Malik",
+    "email": "omaramalik94@gmail.com"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "*",
+    "mongo": "*",
+    "mongoose": "^4.4.5",
+    "passport": "^0.3.2"
+  }
+}
