@@ -11,9 +11,9 @@ angular.module('app.controllers', [])
 })
 
 .controller('NewTopicController', function($scope, $http, $location) {
-  $scope.createNewTopic = function(title) {
-    console.log(title);
-    $http.post('/topics', {title: title})
+  $scope.createNewTopic = function(name) {
+    console.log(name);
+    $http.post('/topics', {name: name})
     .then(function(resp) {
       console.log('success', resp.success);
       $location.path('#/');
@@ -26,23 +26,33 @@ angular.module('app.controllers', [])
 })
 
 .controller('TopicController', function($scope, $http, $routeParams) {
-  $scope.title = $routeParams.title;
+  $scope.name = $routeParams.name;
 
-  $http.get('/topics/' + $scope.title)
+  $http.get('/topics/' + $scope.name)
   .then(function(resp) {
     console.log(resp.data.topic);
   });
 })
 
 .controller('NewPathController', function($scope, $http, $routeParams) {
-  $scope.title = $routeParams.title;
+  $scope.name = $routeParams.name;
 
-  $http.get('/topics/' + $scope.title)
+  $http.get('/topics/' + $scope.name)
   .then(function(resp) {
     console.log(resp.data.topic);
   });
 
-  $scope.createPath = function(name, link, desc) {
-    console.log(name, link, desc);
+  $scope.path = {};
+  $scope.steps = [{}];
+  $scope.createPath = function() {
+    console.log($scope.steps);
   };
+
+  $scope.addStep = function() {
+    $scope.steps.push({});
+  }
+
+  $scope.deleteStep = function(step) {
+    console.log('deleting', step);
+  }
 });

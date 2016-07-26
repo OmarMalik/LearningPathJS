@@ -31,24 +31,24 @@ app.get('/topics', function(req, res) {
   });
 });
 
-app.get('/topics/:title', function(req, res) {
-  Topic.findOne({'title': req.params.title}, function(err, topic) {
+app.get('/topics/:name', function(req, res) {
+  Topic.findOne({'name': req.params.name}, function(err, topic) {
     console.log('topic found', topic);
     res.send({topic: topic});
   });
 });
 
 app.post('/topics', function(req, res) {
-  var topic = new Topic({title: req.body.title});
+  var newTopic = new Topic({name: req.body.name});
 
-  Topic.findOne({'title': req.body.title}, function(err, topic) {
+  Topic.findOne({'name': req.body.name}, function(err, topic) {
     if(topic) {
       return res.send({
         success: false,
         reason: 'Topic exists'
       });
     }
-    return topic.save(function(err, topic) {
+    return newTopic.save(function(err, topic) {
       if(err) 
         res.send({success: false});
       res.send({success: true});

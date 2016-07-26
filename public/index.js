@@ -15,11 +15,11 @@ config(function ($routeProvider, $locationProvider) {
     templateUrl: 'templates/new-topic.html',
     controller: 'NewTopicController'
   })
-  .when('/topics/:title', {
+  .when('/topics/:name', {
     templateUrl: 'templates/topic.html',
     controller: 'TopicController'
   })
-  .when('/topics/:title/new-path', {
+  .when('/topics/:name/new-path', {
     templateUrl: 'templates/new-path.html',
     controller: 'NewPathController'
   })

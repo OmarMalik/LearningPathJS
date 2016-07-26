@@ -1,15 +1,21 @@
 <div ng-controller="NewPathController" class="wrapper">
 
-<h1>{{title}}</h1>
-<h2>New Path</h2>
+<h2>New {{name}} Path</h2>
 
-Each step of path should have title, description, link to tutorial
+<div>
+Name <input type="text" ng-model="path.name">
+</div>
 
-<br>
-Name <input type="text" ng-model="pathName" /> <br>
-Link <input type="text" ng-model="pathLink" /> <br>
-Description <input type="text" ng-model="pathDesc" /> <br>
-
-<button ng-click="createPath(pathName, pathLink, pathDesc)">Create Path</button>
+<div ng-repeat="step in steps">
+  <h4 style="float:left"> Step {{$index + 1}} <button ng-click="deleteStep(step)" style="font-size:15px">delete</button></h4>
+  
+  <div style="clear:both"></div>
+  <br>
+  Name <input type="text" ng-model="step.name" /> <br>
+  Link <input type="text" ng-model="step.link" /> <br>
+  Description <input type="text" ng-model="step.desc" /> <br>
+</div>
+<button class="waves-effect waves-light btn" ng-click="createPath()">Create Path</button>
+<button class="waves-effect waves-light btn" ng-click="addStep()">Add Step</button>
 
 </div>
