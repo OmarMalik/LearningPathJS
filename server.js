@@ -5,6 +5,7 @@ var path = require('path');
 var assert = require('assert');
 var bodyParser = require('body-parser');
 var Topic = require('./schema/TopicSchema');
+var Path = require('./schema/PathSchema');
 
 app.set('views', path.join(__dirname, 'public'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -54,6 +55,27 @@ app.post('/topics', function(req, res) {
       res.send({success: true});
     });
   });  
+});
+
+// PATH ROUTES
+app.post('/topics/:name/paths', function(req, res) {
+  console.log('req.params', req.params);
+  console.log('req.body', req.body);
+
+  Topic.findOne({'name': req.params.name}, function(err, topic) {
+    var newPath = new Path({
+      name: req.body.name,
+      steps: req.body.steps,
+      topic: topic._id
+    });
+    console.log('newPath', newPath);
+    newPath.save();
+
+    topic.paths.push(newPath._id);
+    topic.save(); 
+  });
+
+  res.send('success');
 });
 
 // START SERVER

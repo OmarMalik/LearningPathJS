@@ -1,8 +1,8 @@
 <div ng-controller="AppController">
   <div class="row">
-    <a ng-repeat="topic in topics" href="#/topics/{{topic.title}}">
+    <a ng-repeat="topic in topics" href="#/topics/{{topic.name}}">
       <div class="topic col m4 card-panel teal lighten-4">
-        <span>{{topic.title}}</span>
+        <span>{{topic.name}}</span>
       </div>
     </a>
   </div>

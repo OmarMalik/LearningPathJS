@@ -5,7 +5,7 @@ angular.module('app.controllers', [])
   $scope.topics = [];
   $http.get('/topics')
   .then(function(resp) {
-    console.log(resp);
+    console.log('AppController', resp);
     $scope.topics = resp.data.topics;
   });
 })
@@ -35,24 +35,46 @@ angular.module('app.controllers', [])
 })
 
 .controller('NewPathController', function($scope, $http, $routeParams) {
-  $scope.name = $routeParams.name;
+  $scope.topicName = $routeParams.name;
+  var curr = 0;
 
   $http.get('/topics/' + $scope.name)
   .then(function(resp) {
     console.log(resp.data.topic);
   });
 
-  $scope.path = {};
-  $scope.steps = [{}];
+  $scope.pathName = '';
+  $scope.steps = [{
+    index: curr
+  }];
   $scope.createPath = function() {
+    console.log($scope.topicName);
+    console.log($scope.pathName);
     console.log($scope.steps);
+
+    $http.post('/topics/' + $scope.topicName + '/paths', {
+      name: $scope.pathName,
+      steps: $scope.steps
+    })
+    .then(function(resp) {
+      console.log('resp', resp);
+    });
   };
 
   $scope.addStep = function() {
-    $scope.steps.push({});
+    curr++;
+    $scope.steps.push({
+      index: curr
+    });
   }
 
-  $scope.deleteStep = function(step) {
-    console.log('deleting', step);
+  $scope.deleteStep = function(index) {
+    for(var i = 0; i < $scope.steps.length; i++) {
+      if($scope.steps[i].index === index) {
+        $scope.steps.splice(i, 1);
+      }
+    }
+    console.log('deleting', index);
+    console.log('new steps:', $scope.steps);
   }
 });

@@ -1,13 +1,13 @@
 <div ng-controller="NewPathController" class="wrapper">
 
-<h2>New {{name}} Path</h2>
+<h2>New {{topicName}} Path</h2>
 
 <div>
-Name <input type="text" ng-model="path.name">
+Name <input type="text" ng-model="pathName">
 </div>
 
 <div ng-repeat="step in steps">
-  <h4 style="float:left"> Step {{$index + 1}} <button ng-click="deleteStep(step)" style="font-size:15px">delete</button></h4>
+  <h4 style="float:left"> Step {{$index + 1}} <button ng-click="deleteStep(step.index)" style="font-size:15px">delete</button></h4>
   
   <div style="clear:both"></div>
   <br>

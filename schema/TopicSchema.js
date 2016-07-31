@@ -1,23 +1,14 @@
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
-
-var StepSchema = new Schema({
-  date_created: {type: Date, default: Date.now()},
-  name: String,
-  desc: String,
-  link: String
-});
-
-var PathSchema = new Schema({
-  date_created: {type: Date, default: Date.now()},
-  name: String
-});
+require('./PathSchema');
 
 var TopicSchema = new Schema({
   date_created: {type: Date, default: Date.now()},
   name: String,
-  paths: [PathSchema]
+  paths: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Path'
+  }]
 });
 
 module.exports = mongoose.model('Topic', TopicSchema);
